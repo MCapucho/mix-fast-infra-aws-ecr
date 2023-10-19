@@ -1,5 +1,5 @@
 variable "region" {
-  default = "us-east-2"
+  default = "us-east-1"
 }
 
 variable "tags" {
@@ -13,4 +13,9 @@ variable "tags" {
 variable "name" {
   type = string
   default = "mixfast"
+}
+
+variable "image_tag_mutability" {
+  type = string
+  default = "IMMUTABLE"
 }
