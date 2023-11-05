@@ -34,3 +34,22 @@ resource "aws_ecr_repository_policy" "this" {
  }
  EOF
 }
+
+resource "aws_ecr_lifecycle_policy" "this" {
+  repository = aws_ecr_repository.mixfast_ecr_repository.name
+
+  policy = jsonencode({
+    rules = [{
+      rulePriority = 1
+      description  = "last 10 docker images"
+      action = {
+        type = "expire"
+      }
+      selection = {
+        tagStatus   = "any"
+        countType   = "imageCountMoreThan"
+        countNumber = 10
+      }
+    }]
+  })
+}
